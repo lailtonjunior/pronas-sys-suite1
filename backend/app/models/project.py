@@ -26,7 +26,7 @@ class Project(Base):
     status = Column(Enum(ProjectStatus), default=ProjectStatus.DRAFT)
     institution_name = Column(String)
     institution_cnpj = Column(String)
-    total_budget = Column(Integer)  # Em centavos
+    total_budget = Column(Integer)
     priority_area = Column(String)
     
     owner_id = Column(Integer, ForeignKey("users.id"))
