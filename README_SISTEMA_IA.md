@@ -136,7 +136,7 @@ text
 
 ### Variáveis de Ambiente (.env)
 Database
-DATABASE_URL=postgresql://pronas_user:PronasPCD2025Secure!@postgres:5432/pronas_pcd
+DATABASE_URL=postgresql://pronas_user:YOUR_DB_PASSWORD_HERE@postgres:5432/pronas_pcd
 
 Vector Database (RAG)
 QDRANT_URL=http://qdrant:6333
@@ -145,7 +145,7 @@ Cache
 REDIS_URL=redis://redis:6379
 
 APIs de IA
-OPENAI_API_KEY=sk-proj-xxx...
+OPENAI_API_KEY=sk-proj-YOUR_KEY_HERE...
 GEMINI_API_KEY=AIza...
 Segurança
 SECRET_KEY=change-this-secret-key-in-production-min-32-chars
@@ -155,7 +155,7 @@ text
 ### docker-compose.yml (Backend)
 backend:
 environmen
-: - OPENAI_API_KEY=sk-proj-
+: - OPENAI_API_KEY=sk-proj-YOUR_KEY_HERE
 xx... - GEMINI_API_K
 text
 

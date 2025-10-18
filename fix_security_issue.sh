@@ -1,3 +1,18 @@
+#!/bin/bash
+
+echo "🚨 CORREÇÃO DE SEGURANÇA: Removendo API Keys do Git"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# 1. Backup do docker-compose.yml
+cp docker-compose.yml docker-compose.yml.backup.security
+echo "✅ Backup criado"
+
+# 2. Substituir API keys hardcoded por variáveis de ambiente
+echo "📝 Modificando docker-compose.yml..."
+
+# Criar versão corrigida do docker-compose.yml
+cat > docker-compose.yml.new << 'COMPOSE'
 version: '3.8'
 
 services:
@@ -86,3 +101,24 @@ networks:
 volumes:
   postgres_data:
   qdrant_data:
+COMPOSE
+
+mv docker-compose.yml.new docker-compose.yml
+echo "✅ docker-compose.yml corrigido (usando variáveis de ambiente)"
+
+# 3. Verificar .gitignore
+echo ""
+echo "📝 Verificando .gitignore..."
+if ! grep -q "^.env$" .gitignore 2>/dev/null; then
+    echo ".env" >> .gitignore
+    echo "*.backup*" >> .gitignore
+    echo "docker-compose.yml.backup*" >> .gitignore
+    echo "✅ .gitignore atualizado"
+else
+    echo "✅ .env já está no .gitignore"
+fi
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ CORREÇÕES APLICADAS"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
