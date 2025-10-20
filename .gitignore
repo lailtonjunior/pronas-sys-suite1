@@ -16,3 +16,12 @@ uploads/
 exports/
 nginx/ssl/*.key
 nginx/ssl/*.crt
+
+# Secrets
+env*
+.env*
+*.env
+*.env.*
+*.env.backup*
+*backup*.env*
+
